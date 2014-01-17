@@ -4,7 +4,7 @@
   "description": "memcached sessions for express",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha -R spec"
   },
   "repository": {
     "type": "git",
@@ -23,5 +23,10 @@
   "homepage": "https://github.com/allouis/memcached",
   "dependencies": {
     "memcached": "~0.2.6"
+  },
+  "devDependencies": {
+    "should": "~3.0.0",
+    "mocha": "~1.17.0",
+    "express": "~3.4.8"
   }
 }
