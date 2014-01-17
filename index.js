@@ -7,7 +7,7 @@ function createSessionStore(express) {
   var ExpressStore = express.session.Store;
 
   function SessionStore(options) {
-    ExpressStore.call(this); 
+    ExpressStore.call(this, options); 
     this.memstore = new Memcached(options.host, options);
     this['getByName'] = this.memstore.get.bind(this.memstore);
   }
@@ -66,7 +66,9 @@ function createSessionStore(express) {
     clear: function(cb) {
       cb = cb || fakecb;
       this.memstore.flush(cb);  
-    }
+    },
+
+    __proto__: ExpressStore.prototype
 
   };
 
