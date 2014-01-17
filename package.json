@@ -20,5 +20,8 @@
   "bugs": {
     "url": "https://github.com/allouis/memcached/issues"
   },
-  "homepage": "https://github.com/allouis/memcached"
+  "homepage": "https://github.com/allouis/memcached",
+  "dependencies": {
+    "memcached": "~0.2.6"
+  }
 }
