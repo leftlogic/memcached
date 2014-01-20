@@ -1,6 +1,6 @@
 var Memcached = require('memcached');
 
-var fakecb = function () {};
+var noop = function () {};
 
 function createSessionStore(express) {
   
@@ -13,7 +13,7 @@ function createSessionStore(express) {
   }
 
   function getSession(memstore, cb) {
-    cb = cb || fakecb;
+    cb = cb || noop;
     return function (err, name) {
       if (err) {
         return cb(err, null);
@@ -23,7 +23,7 @@ function createSessionStore(express) {
   }
 
   function setSession(memstore, val, lifetime, cb) {
-    cb = cb || fakecb;
+    cb = cb || noop;
     return function (err) {
       if (err) {
         // Not a problem, the sid already existed
@@ -33,7 +33,7 @@ function createSessionStore(express) {
   }
 
   function removeSession(memstore, id, cb){
-    cb = cb || fakecb;
+    cb = cb || noop;
     return function (err, name) {
       if (err) {
         return cb(err, null);
@@ -64,7 +64,7 @@ function createSessionStore(express) {
     },
 
     clear: function(cb) {
-      cb = cb || fakecb;
+      cb = cb || noop;
       this.memstore.flush(cb);  
     },
 
