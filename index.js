@@ -9,7 +9,7 @@ function createSessionStore(express) {
   function SessionStore(options) {
     ExpressStore.call(this, options); 
     this.memstore = new Memcached(options.host, options);
-    this['getByName'] = this.memstore.get.bind(this.memstore);
+    this.getByName = this.memstore.get.bind(this.memstore);
   }
 
   function getSession(memstore, cb) {
@@ -28,7 +28,7 @@ function createSessionStore(express) {
       if (err) {
         // Not a problem, the sid already existed
       } 
-      memstore.set(val.name, val, lifetime, cb);
+      memstore.set(val.user.name, val, 50000, cb);
     };
   }
 
@@ -53,9 +53,11 @@ function createSessionStore(express) {
       this.memstore.get(id, getSession(this.memstore, cb));  
     },
 
-    set: function(id, val, lifetime, cb) {
-      if (val.constructor === Object && !!val.name) {
-        this.memstore.add(id, val.name, lifetime, setSession(this.memstore, val, lifetime, cb));
+    set: function(id, val,/* lifetime,*/ cb) {
+      console.log('SessionStore#set:: ', id, val);
+      var lifetime = val.cookie.maxAge;
+      if(!val.user) {
+        return this.memstore.set(id, val, lifetime, (cb || noop));
       }
     },
 
