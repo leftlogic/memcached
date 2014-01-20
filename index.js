@@ -61,6 +61,8 @@ function createSessionStore(express) {
       if(!val.user) {
         return this.memstore.set(id, val, lifetime, (cb || noop));
       }
+      val.memstoreID = id;
+      this.memstore.set(id, val.user.name, lifetime, setSession(this.memstore, val, lifetime, cb));
     },
 
     destroy: function(id, cb) {
