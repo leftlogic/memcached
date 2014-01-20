@@ -52,6 +52,7 @@ function createSessionStore(express) {
     getKey: function(id) { return id; },
 
     get: function(id, cb) {
+      console.log('SessionStore#get:: ', id);
       this.memstore.get(id, getSession(this.memstore, cb));  
     },
 
