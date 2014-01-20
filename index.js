@@ -49,6 +49,8 @@ function createSessionStore(express) {
 
   SessionStore.prototype = {
 
+    getKey: function(id) { return id; },
+
     get: function(id, cb) {
       this.memstore.get(id, getSession(this.memstore, cb));  
     },
