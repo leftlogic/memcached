@@ -1,6 +1,6 @@
 {
   "name": "memcached-express",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "memcached sessions for express",
   "main": "index.js",
   "scripts": {
