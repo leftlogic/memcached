@@ -18,6 +18,9 @@ function createSessionStore(express) {
       if (err) {
         return cb(err, null);
       } 
+      if (name.constructor === Object) {
+        return cb(null, name);
+      }
       memstore.get(name, cb);
     };
   }
