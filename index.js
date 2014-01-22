@@ -56,12 +56,10 @@ function createSessionStore(express) {
     getKey: function(id) { return id; },
 
     get: function(id, cb) {
-      console.log('SessionStore#get:: ', id);
       this.memstore.get(id, getSession(this.memstore, cb));  
     },
 
     set: function(id, val, cb) {
-      console.log('SessionStore#set:: ', id, val);
       var lifetime = val.cookie.maxAge;
       if (!val.user) {
         return this.memstore.set(id, val, lifetime, (cb || noop));
@@ -77,7 +75,7 @@ function createSessionStore(express) {
     destroyByName: function(name, cb) {
       cb = cb || noop;
       this.memstore.get(name, function(err, val){
-        this.destroy(val.memstoreID, cb)
+        this.destroy(val.memstoreID, cb);
       }.bind(this));                
     },
 
