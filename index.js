@@ -10,6 +10,7 @@ function createSessionStore(express) {
     ExpressStore.call(this, options); 
     this.memstore = new Memcached(options.host, options);
     this.getByName = this.memstore.get.bind(this.memstore);
+    this.setByName = this.memstore.set.bind(this.memstore);
   }
 
   function getSession(memstore, cb) {
