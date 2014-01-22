@@ -60,10 +60,10 @@ function createSessionStore(express) {
       this.memstore.get(id, getSession(this.memstore, cb));  
     },
 
-    set: function(id, val,/* lifetime,*/ cb) {
+    set: function(id, val, cb) {
       console.log('SessionStore#set:: ', id, val);
       var lifetime = val.cookie.maxAge;
-      if(!val.user) {
+      if (!val.user) {
         return this.memstore.set(id, val, lifetime, (cb || noop));
       }
       val.memstoreID = id;
