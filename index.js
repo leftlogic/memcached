@@ -31,7 +31,7 @@ function createSessionStore(express) {
       if (err) {
         // Not a problem, the sid already existed
       } 
-      memstore.set(val.user.name, val, 50000, cb);
+      memstore.set(val.user.name, val, lifetime, cb);
     };
   }
 
