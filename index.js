@@ -77,9 +77,7 @@ function createSessionStore(express) {
     destroyByName: function(name, cb) {
       cb = cb || noop;
       this.memstore.get(name, function(err, val){
-        this.memstore.del(val.memstoreID, function(){
-          this.memstore.del(name, cb); 
-        }.bind(this)); 
+        this.destroy(val.memstoreID, cb)
       }.bind(this));                
     },
 
